@@ -1,17 +1,9 @@
 from fastapi import FastAPI
-
-from app.core.config import settings
-from app.routers import health
+from app.api.routes.health import router as health_router
 
 app = FastAPI(
-    title=settings.APP_NAME,
-    version=settings.APP_VERSION
+    title="Adaptive AI Command Center",
+    version="1.0.0"
 )
 
-app.include_router(health.router)
-
-@app.get("/")
-def root():
-    return {
-        "message": f"{settings.APP_NAME} Running"
-    }
+app.include_router(health_router)
